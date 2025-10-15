@@ -1,0 +1,283 @@
+/* --- src/components/common/CommonStyles.css (FINAL CONSOLIDATED SHARED STYLES) --- */
+
+/* --- 0. VARIABLES & BASE STYLES --- */
+:root {
+  /* Standard Chartered Official Colors */
+  --sc-green: #00705f; 
+  --sc-light-green: #008f7d; 
+  --sc-secondary: #0072CE; 
+  
+  /* General UI Colors */
+  --sc-light: #f0f8f7; 
+  --sc-white: #ffffff;
+  --sc-text-dark: #333333;
+  --sc-text-medium: #666666;
+  --sc-border: #e0e0e0;
+  --sc-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); 
+  --sc-radius: 8px;
+  --layout-width: 85%;
+  --layout-margin-left: 5%;
+}
+
+body {
+  font-family: 'Inter', sans-serif; 
+  background-color: #f5f7f9; 
+  color: var(--sc-text-dark);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ------------------------------------------------------------- */
+/* --- 1. SHARED LAYOUT & HEADER STYLES --- */
+/* ------------------------------------------------------------- */
+.main-header {
+  display: flex;
+  align-items: center;
+  padding: 18px 40px; 
+  background-color: var(--sc-white);
+  border-bottom-left-radius: 16px; 
+  border-bottom-right-radius: 16px;
+  border-bottom: 3px solid var(--sc-green); 
+  box-shadow: var(--sc-shadow);
+  width: var(--layout-width); 
+  margin: 0 0 30px var(--layout-margin-left); 
+  /* FIX: Removed justify-content: space-between here. 
+     It should be applied inline or conditionally to avoid breaking Layout.js */
+}
+
+.logo-section {
+  padding-right: 20px;
+  margin-right: 20px;
+  border-right: 1px solid var(--sc-border);
+  cursor: pointer;
+}
+
+.sc-logo { height: 45px; width: auto; }
+.user-profile { display: flex; flex-direction: column; white-space: nowrap; }
+.user-name { margin: 0; font-size: 1.7rem; color: var(--sc-green); font-weight: 700; }
+.user-email { margin: 0; font-size: 0.85rem; color: var(--sc-text-medium); }
+
+/* --- Header Action Container FIX --- */
+.header-left-content { display: flex; align-items: center; }
+
+/* FIX: This class now handles its internal gaps and positioning */
+.header-actions { 
+    display: flex; 
+    align-items: center;
+    gap: 15px; 
+    margin-left: auto; /* CRITICAL FIX: Pushes the entire action group to the far right */
+}
+
+/* --- Notification Icon Toggle --- */
+.notification-toggle-button {
+    background: none; border: none; cursor: pointer; padding: 10px;
+    border-radius: 50%; transition: background-color 0.2s, color 0.2s;
+    position: relative; color: var(--sc-green); display: flex; 
+    align-items: center; justify-content: center;
+}
+.notification-toggle-button:hover { background-color: var(--sc-light); color: var(--sc-light-green); }
+.notification-toggle-button.active { color: var(--sc-secondary); background-color: var(--sc-light); }
+.notification-badge {
+    position: absolute; top: 5px; right: 5px; background-color: #cc0000;
+    color: var(--sc-white); border-radius: 50%; padding: 2px 5px;
+    font-size: 0.7rem; line-height: 1; min-width: 15px; text-align: center;
+    font-weight: 700;
+}
+
+/* --- Logout Button Styling --- */
+.logout-button {
+    background-color: var(--sc-secondary);
+    color: var(--sc-white);
+    font-size: 0.9rem;
+    padding: 8px 12px;
+}
+.logout-button:hover {
+    background-color: #005bb5;
+    color: var(--sc-white);
+}
+
+/* --- Content Wrapper (Used by all routed components) --- */
+.dashboard-content {
+  width: var(--layout-width); 
+  margin: 0 0 30px var(--layout-margin-left); 
+  padding: 0 40px; 
+}
+
+
+/* ------------------------------------------------------------- */
+/* --- 2. DASHBOARD STYLES (SubscriberDashboard.js) --- */
+/* ------------------------------------------------------------- */
+/* --- Search Bar Styling --- */
+.search-bar-container { width: 100%; margin-bottom: 30px; }
+.search-input-group {
+    display: flex; align-items: center; padding: 12px 20px;
+    background-color: var(--sc-white); border-radius: var(--sc-radius);
+    box-shadow: var(--sc-shadow); border: 1px solid var(--sc-border);
+    max-width: 600px;
+}
+.search-input-group:focus-within { border-color: var(--sc-secondary); box-shadow: 0 0 0 2px rgba(0, 114, 206, 0.2); }
+.sc-search-input { flex-grow: 1; border: none; outline: none; padding-left: 15px; font-size: 1rem; color: var(--sc-text-dark); font-family: inherit; }
+.search-input-group svg { color: var(--sc-text-medium); }
+
+/* --- Tab Switcher Styles --- */
+.tab-switcher { display: flex; margin-bottom: 20px; border-bottom: 2px solid var(--sc-border); max-width: 700px; }
+.tab-button {
+    background: none; border: none; padding: 12px 20px; font-size: 1rem; font-weight: 600; 
+    color: var(--sc-text-medium); cursor: pointer; transition: color 0.2s; border-bottom: 2px solid transparent;
+    margin-bottom: -2px; white-space: nowrap;
+}
+.tab-button:hover { color: var(--sc-text-dark); }
+.tab-button.active { color: var(--sc-green); border-bottom: 2px solid var(--sc-green); }
+
+/* --- Dashboard Grid & Notifications Layout --- */
+.main-content-grid.permanent-split { display: grid; align-items: flex-start; }
+.primary-table-card { width: auto; }
+.notification-panel {
+    background-color: var(--sc-white); border-radius: var(--sc-radius); box-shadow: var(--sc-shadow); 
+    padding: 25px; border-top: 5px solid var(--sc-secondary);
+}
+.notification-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--sc-border); }
+.notification-title { font-size: 1.2rem; font-weight: 600; color: var(--sc-secondary); margin: 0; }
+.notification-item { padding: 12px 0; border-bottom: 1px dotted var(--sc-border); cursor: pointer; }
+.notification-item:hover { background-color: #f7fbfb; padding-left: 5px; }
+.notification-report-name { color: var(--sc-green); font-weight: 700; }
+.admin-approval-button { background-color: #66bb6a; color: white; padding: 5px 10px; font-size: 0.75rem; font-weight: 500; }
+.admin-approval-button:hover { background-color: #4caf50; }
+
+
+/* ------------------------------------------------------------- */
+/* --- 3. DOWNLOAD PAGE STYLES (SubscriberDownloadPage.js) --- */
+/* ------------------------------------------------------------- */
+.top-filter-bar {
+  display: flex; justify-content: space-between; align-items: center; padding: 20px 25px; margin-bottom: 25px; 
+  background-color: var(--sc-white); border-radius: var(--sc-radius); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--sc-light); border-left: 5px solid var(--sc-secondary); 
+}
+.filter-card-content { display: flex; gap: 20px; align-items: flex-end; flex-grow: 1; justify-content: flex-start; max-width: 70%; }
+.download-action-content { min-width: 250px; margin-left: 30px; }
+.form-group { margin-bottom: 0; min-width: 150px; }
+.form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: var(--sc-text-dark); font-size: 0.9rem; }
+.date-input { width: 100%; padding: 10px; border: 1px solid var(--sc-border); border-radius: 4px; box-sizing: border-box; font-size: 0.95rem; font-family: inherit; max-width: 170px; }
+.date-input:focus { border-color: var(--sc-green); outline: none; box-shadow: 0 0 0 2px rgba(0, 112, 95, 0.2); }
+.filter-search-button { width: auto; padding: 10px 18px; font-size: 0.9rem; background-color: var(--sc-secondary); color: var(--sc-white); margin-top: 0; border-radius: 4px; }
+.filter-search-button:hover { background-color: #005bb5; }
+.clear-filter-button { background-color: var(--sc-light); color: var(--sc-secondary); border: 1px solid var(--sc-secondary); padding: 10px 18px; font-size: 0.9rem; font-weight: 500; margin-top: 0; border-radius: 4px; }
+.clear-filter-button:hover { background-color: #eaf3ff; color: #005bb5; border-color: #005bb5; }
+
+
+/* ------------------------------------------------------------- */
+/* --- 4. OPS PAGE STYLES (OpsPage.js) --- */
+/* ------------------------------------------------------------- */
+/* --- Transfer Table Specifics --- */
+.destination-tag { background-color: var(--sc-light); color: var(--sc-text-dark); padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: 500; }
+.transfer-button { padding: 8px 12px; font-size: 0.8rem; font-weight: 600; background-color: var(--sc-secondary); color: var(--sc-white); }
+.transfer-button:hover:not(:disabled) { background-color: #005bb5; }
+.status-ready-to-transfer { background-color: var(--sc-light); color: var(--sc-text-dark); }
+.status-transferred { background-color: #d4edda; color: #155724; }
+.status-processing { background-color: #fff9e6; color: #ff9900; }
+.transfer-button[disabled] { background-color: #28a745; cursor: not-allowed; opacity: 1; }
+
+/* --- Notification Sidebar Layout --- */
+.ops-notification-sidebar {
+    position: fixed; top: 0; right: 0; width: 350px; height: 100%; z-index: 1000;
+    transform: translateX(100%); transition: transform 0.3s ease-in-out;
+    background-color: var(--sc-white); box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+}
+.ops-notification-sidebar.visible { transform: translateX(0); }
+.ops-notification-panel { height: 100%; padding: 30px 25px; border-radius: 0; border-top: none !important; box-shadow: none; overflow-y: hidden; }
+
+.notification-panel-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--sc-border);
+}
+
+.ops-notification-panel .notification-title { font-size: 1.2rem; color: var(--sc-secondary); margin: 0; padding-bottom: 0; border-bottom: none; }
+.notification-list-scroll { height: calc(100% - 80px); overflow-y: auto; padding-right: 10px; }
+
+/* FIX 2: Fixed Width and Vertical Alignment for Notification Items */
+.ops-notification-item {
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 12px 0; border-bottom: 1px dotted var(--sc-border); gap: 15px;
+}
+.item-details { flex: 0 0 65%; display: flex; flex-direction: column; } /* Fixed width 65% */
+.item-file-name { font-weight: 700; color: var(--sc-text-dark); font-size: 0.95rem; word-break: break-word; }
+.item-file-id, .item-destination { font-size: 0.8rem; color: var(--sc-text-medium); }
+
+.get-file-button {
+    flex: 0 0 30%; /* Fixed width 30% */
+    background-color: var(--sc-green); color: var(--sc-white); padding: 8px 12px;
+    font-size: 0.75rem; font-weight: 600; white-space: nowrap;
+}
+.get-file-button:hover { background-color: var(--sc-light-green); }
+
+
+/* ------------------------------------------------------------- */
+/* --- 5. COMMON BASE COMPONENTS (Used by all component tables) --- */
+/* ------------------------------------------------------------- */
+.main-reports-area { padding: 0; }
+.reports-area {
+  width: 96%; background-color: var(--sc-white); border-radius: var(--sc-radius); 
+  padding: 25px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.reports-area .table-responsive { max-height: 500px; overflow-y: auto; overflow-x: hidden; border: 1px solid var(--sc-border); border-radius: var(--sc-radius); }
+.reports-area .data-table { width: 100%; border-collapse: separate; border-spacing: 0; text-align: left; }
+.data-table th, .data-table td { padding: 12px 15px; border-bottom: 1px solid var(--sc-border); vertical-align: top; }
+.data-table th { background-color: var(--sc-light); color: var(--sc-text-dark); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; position: sticky; top: 0; z-index: 10; }
+.data-table tbody tr:hover { background-color: #fcfcfc; transition: background-color 0.2s ease; }
+.subscriber-table tr:hover { background-color: var(--sc-light); }
+
+.status-tag { padding: 5px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; display: inline-block; }
+.status-processed, .status-active { background-color: #e6f7ff; color: var(--sc-secondary); }
+.status-pending, .status-available { background-color: #fff9e6; color: #ff9900; }
+.status-failed, .status-inactive { background-color: #ffe6e6; color: #cc0000; }
+
+.action-link {
+  color: var(--sc-green); text-decoration: none; font-weight: 700; 
+  transition: color 0.2s, text-decoration 0.2s; text-transform: uppercase; 
+  font-size: 0.85rem; display: flex; align-items: center; gap: 5px;
+}
+.action-link:hover { color: var(--sc-light-green); text-decoration: underline; }
+.action-button {
+  padding: 10px 15px; border: none; border-radius: 4px; font-size: 0.8rem; 
+  font-weight: 600; cursor: pointer; transition: background-color 0.2s ease, transform 0.1s, opacity 0.2s; 
+  display: flex; align-items: center; justify-content: center; gap: 5px; text-transform: uppercase; white-space: nowrap;
+}
+.subscribe-button { background-color: var(--sc-secondary); color: var(--sc-white); }
+.subscribe-button:hover { background-color: #005bb5; }
+.secondary-button { background-color: var(--sc-green); color: var(--sc-white); width: 100%; padding: 12px 20px; font-size: 1rem; }
+
+
+/* ------------------------------------------------------------- */
+/* --- 6. RESPONSIVENESS (Global Adjustments) --- */
+/* ------------------------------------------------------------- */
+@media (max-width: 1200px) {
+    /* Dashboard/General Grid */
+    .main-content-grid.permanent-split { grid-template-columns: 1fr !important; gap: 20px !important; }
+    /* Download Filter Responsiveness */
+    .filter-card-content { flex-wrap: wrap; gap: 20px; max-width: 100%; justify-content: flex-start; align-items: stretch; }
+    .date-input { max-width: 100%; }
+}
+
+@media (max-width: 900px) {
+    /* Download Filter Stacking */
+    .top-filter-bar { flex-direction: column; align-items: flex-start; padding: 20px; }
+    .filter-card-content { width: 100%; margin-bottom: 15px; flex-direction: column; align-items: stretch; }
+    .download-action-content { width: 100%; min-width: 100%; margin-left: 0; }
+    .filter-search-button, .clear-filter-button { flex-grow: 1; width: 100%; margin-top: 5px; }
+    .form-group { min-width: 100%; }
+    .date-input { max-width: 100%; }
+    .search-input-group { max-width: 100%; }
+}
+
+@media (max-width: 600px) {
+    .dashboard-content, .main-header { width: 100%; padding: 0 15px; margin-left: 0; }
+    .main-header { border-radius: 0; margin: 0 0 20px 0; padding: 15px 15px; }
+    .user-name { font-size: 1.4rem; }
+    .top-filter-bar { padding: 15px; border-left: 3px solid var(--sc-secondary); }
+}
